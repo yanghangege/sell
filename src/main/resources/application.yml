@@ -1,0 +1,37 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: 123456
+    url: jdbc:mysql://192.168.1.151/sell?useUnicode=true&characterEncoding=UTF8&useSSL=false
+  jpa:
+    show-sql: true
+  redis:
+    host: 192.168.1.151
+    port: 6379
+
+#全局配置如果返回的是null的话就不返回这个字段！
+#  jackson:
+#    default-property-inclusion: non_null
+server:
+    context-path: /sell
+
+#logging:
+#  pattern:
+#    console: "%d - %msg%n"
+#  path: /var/log/tomcat
+#  file: /var/log/tomcat/sell.log
+#  level:
+#    com.spring.sell.LoggerTest : debug
+wechat:
+#  mpAppId: wx8e8d96e59548bf33
+#  mpAppSecret: 251935acb92bf57d5112f6bdd79cd787
+  mchId:
+  mchKey:
+  keyPath:
+
+projectUrl:
+  wechatMpAuthorize:
+  wechatOpenAuthorize:
+  sell:
+
