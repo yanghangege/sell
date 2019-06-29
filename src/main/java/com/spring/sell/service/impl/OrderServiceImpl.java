@@ -9,6 +9,7 @@ import com.spring.sell.dto.OrderDTO;
 import com.spring.sell.enums.OrderStatusEnum;
 import com.spring.sell.enums.PayStatusEnum;
 import com.spring.sell.enums.ResultEnum;
+import com.spring.sell.exception.ResponseBankException;
 import com.spring.sell.exception.SellException;
 import com.spring.sell.repository.OrderDetailRepository;
 import com.spring.sell.repository.OrderMasterRepository;
@@ -69,6 +70,8 @@ public class OrderServiceImpl implements OrderService {
             ProductInfo productInfo = productService.findOne(orderDetail.getProductId());
             if (productInfo == null){
                 throw new SellException(ResultEnum.PRODUCT_NOT_EXIST);
+                //如果想要的不是一个json返回的code加上错误内容，而是直接返回错误码就用下面的异常捕获
+//                throw new ResponseBankException();
             }
             //2.计算订单总价（产品价格*产品数量  用.multiply方法来*）
             orderAmount = productInfo.getProductPrice()

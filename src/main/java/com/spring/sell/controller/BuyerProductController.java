@@ -10,6 +10,8 @@ import com.spring.sell.service.ProductService;
 import com.spring.sell.utils.ResultVOUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,12 +25,14 @@ import java.util.stream.Collectors;
  */
 @RestController
 @RequestMapping("/buyer/product")
+@CacheConfig(cacheNames = "product")
 public class BuyerProductController {
     @Autowired
     private ProductService productService;
     @Autowired
     private CategoryService categoryService;
     @GetMapping("/list")
+    @Cacheable(key ="123" )
     public ResultVo list(){
         //1.查询所有上架商品
         List<ProductInfo> productInfosList =  productService.findUpAll();

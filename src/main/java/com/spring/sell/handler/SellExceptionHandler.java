@@ -1,10 +1,17 @@
 package com.spring.sell.handler;
 
+import com.spring.sell.VO.ResultVo;
 import com.spring.sell.config.ProjectUrlConfig;
+import com.spring.sell.exception.ResponseBankException;
+import com.spring.sell.exception.SellException;
 import com.spring.sell.exception.SellerAuthorizeException;
+import com.spring.sell.utils.ResultVOUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -25,5 +32,18 @@ public class SellExceptionHandler {
         .concat("?returnUrl=")
         .concat(projectUrlConfig.getSell())
         .concat("/sell/seller/login"));
+    }
+
+    @ExceptionHandler(value = SellException.class)
+    @ResponseBody
+    public ResultVo handlerSellException(SellException e){
+        return ResultVOUtil.error(e.getCode(),e.getMessage());
+    }
+    //捕获的异常类
+    @ExceptionHandler(value = ResponseBankException.class)
+    //定义上面捕获的异常类所提示的错误码
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    public void handleResponseBankException(){
+
     }
 }

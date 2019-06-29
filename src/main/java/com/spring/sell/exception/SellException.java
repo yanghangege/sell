@@ -1,11 +1,13 @@
 package com.spring.sell.exception;
 
 import com.spring.sell.enums.ResultEnum;
+import lombok.Getter;
 
 /**
  * @Author yanghan
  * @create 2019/6/19 10:29
  */
+@Getter
 public class SellException extends RuntimeException{
     private Integer code;
 
